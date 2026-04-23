@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Password Strength Checker + Hash Cracker</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>🔐 Password Strength Checker</h1>
+    <p class="subtitle">+ Hash Generator & Attack Simulator</p>
+  </header>
+
+  <main>
+
+    <!-- SECTION 1: Password Input -->
+    <section class="card" id="section-strength">
+      <h2>01 — Password Analyzer</h2>
+      <input
+        type="text"
+        id="pwInput"
+        class="pw-input"
+        placeholder="Type a password to analyze..."
+        autocomplete="off"
+      />
+
+      <div class="bar-wrap">
+        <div class="bar-track">
+          <div class="bar-fill" id="barFill"></div>
+        </div>
+        <div class="bar-meta">
+          <span class="strength-label" id="strengthLabel">—</span>
+          <span class="entropy-badge" id="entropyBadge">entropy: — bits</span>
+        </div>
+      </div>
+
+      <div class="checks">
+        <div class="check-item"><span class="dot" id="c1"></span> 8+ characters</div>
+        <div class="check-item"><span class="dot" id="c2"></span> Uppercase (A–Z)</div>
+        <div class="check-item"><span class="dot" id="c3"></span> Lowercase (a–z)</div>
+        <div class="check-item"><span class="dot" id="c4"></span> Numbers (0–9)</div>
+        <div class="check-item"><span class="dot" id="c5"></span> Symbols (!@#$…)</div>
+        <div class="check-item"><span class="dot" id="c6"></span> 12+ characters</div>
+      </div>
+
+      <p class="crack-time" id="crackTime"></p>
+    </section>
+
+    <!-- SECTION 2: Hash Generator -->
+    <section class="card" id="section-hash">
+      <h2>02 — Hash Generator</h2>
+      <div id="hashRows">
+        <p class="muted">Enter a password above to generate hashes.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Attack Simulator -->
+    <section class="card" id="section-attack">
+      <h2>03 — Attack Simulator</h2>
+      <p class="muted" id="targetInfo">Set a password above, then run an attack.</p>
+
+      <div class="attack-tabs">
+        <button class="tab active" id="tabDict" onclick="setTab('dict')">📖 Dictionary Attack</button>
+        <button class="tab" id="tabBrute" onclick="setTab('brute')">💥 Brute-Force Attack</button>
+      </div>
+
+      <div class="attack-log" id="attackLog"></div>
+
+      <div class="progress-bar">
+        <div class="progress-fill" id="progFill"></div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-num" id="sTried">0</div>
+          <div class="stat-lbl">Tried</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" id="sRate">0</div>
+          <div class="stat-lbl">Per sec</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" id="sResult">—</div>
+          <div class="stat-lbl">Result</div>
+        </div>
+      </div>
+
+      <button class="run-btn" id="runBtn" onclick="runAttack()">▶ Run Attack</button>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Built for learning purposes only. Do not use on real systems without permission.</p>
+  </footer>
+
+  <script src="js/hashing.js"></script>
+  <script src="js/strength.js"></script>
+  <script src="js/attacker.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
